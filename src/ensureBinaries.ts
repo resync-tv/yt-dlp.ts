@@ -22,7 +22,6 @@ const ensureBinaries = async (update = false): Promise<string> => {
 
   let downloadUrl = YT_DLP_URL_WIN
   let filename = "yt-dlp.exe"
-  jetpack.dir(BIN_PATH)
 
   switch (os.platform()) {
     case "linux":

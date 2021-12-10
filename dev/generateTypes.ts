@@ -43,7 +43,7 @@ const quicktypeJSON = async (
 
   const jsonStrings: string[] = []
   for (const [name, video] of Object.entries(testVideos)) {
-    log(`generating yt-dlp json for ${name}`)
+    log(`getting yt-dlp json for ${name}`)
 
     const { stdout } = await execa(binPath, ["-J", video])
     jsonStrings.push(stdout)
