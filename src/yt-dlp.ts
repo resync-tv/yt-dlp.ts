@@ -1,4 +1,4 @@
-import type { ytdl } from "../types"
+import type { EnsuredVideoFormat, ytdlAdapter, ytdlInfo } from "../types"
 import type { Video } from "../types/yt-dlp"
 
 import execa from "execa"
@@ -10,7 +10,7 @@ const log = debug("ytdlp")
 export default class YTDLP {
   constructor(public binPath?: string) {}
 
-  getInfo: ytdl.ytdlAdapter = async url => {
+  getInfo: ytdlAdapter = async url => {
     log(`getInfo(${url})`)
     if (!this.binPath) {
       log("no binPath provided, checking for binaries or downloading some")
@@ -19,7 +19,7 @@ export default class YTDLP {
     const { stdout } = await execa(this.binPath, ["-J", url])
     const data = JSON.parse(stdout) as Video
 
-    const transformedData: ytdl.ytdlInfo = {
+    const transformedData: ytdlInfo = {
       videoDetails: {
         title: data.title,
         description: data.description,
@@ -32,7 +32,7 @@ export default class YTDLP {
         },
       },
       formats: data.formats.map(
-        (format): ytdl.transformedVideoFormat => ({
+        (format): EnsuredVideoFormat => ({
           url: format.url,
           hasAudio: format.acodec !== "none",
           hasVideo: format.vcodec !== "none",

@@ -1,5 +1,5 @@
-import type { ytdl } from "../types"
-export { ytdl }
+import type { ytdlAdapter } from "../types"
+export * from "../types"
 
 import any from "promise.any"
 
@@ -12,12 +12,9 @@ const log = debug("main")
 
 export type ResolveStrategy = "fallback" | "first-to-resolve"
 export default class YTDL {
-  constructor(
-    public adapters: ytdl.ytdlAdapter[],
-    public strategy: ResolveStrategy = "fallback"
-  ) {}
+  constructor(public adapters: ytdlAdapter[], public strategy: ResolveStrategy = "fallback") {}
 
-  getInfo: ytdl.ytdlAdapter = async url => {
+  getInfo: ytdlAdapter = async url => {
     if (this.strategy === "fallback") {
       const fallbacks = [...this.adapters]
 
@@ -27,7 +24,10 @@ export default class YTDL {
 
         try {
           const data = await adapter(url)
-          if (data) return data
+          if (data) {
+            log(`${adapter.name} resolved video info`)
+            return data
+          }
         } catch (error) {
           log(`${adapter.name} failed to resolve video info: ${error}`)
         }
