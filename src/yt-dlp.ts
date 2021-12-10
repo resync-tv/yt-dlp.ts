@@ -4,11 +4,18 @@ import type { Video } from "../types/yt-dlp"
 import execa from "execa"
 import ensureBinaries from "./ensureBinaries"
 
+import debug from "./debug"
+const log = debug("ytdlp")
+
 export default class YTDLP {
   constructor(public binPath?: string) {}
 
   getInfo: ytdl.ytdlAdapter = async url => {
-    if (!this.binPath) this.binPath = await ensureBinaries()
+    log(`getInfo(${url})`)
+    if (!this.binPath) {
+      log("no binPath provided, checking for binaries or downloading some")
+      this.binPath = await ensureBinaries()
+    }
     const { stdout } = await execa(this.binPath, ["-J", url])
     const data = JSON.parse(stdout) as Video
 

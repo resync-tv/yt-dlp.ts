@@ -15,3 +15,6 @@ This probably won't be feature-complete and rather will be focused on the core u
 <h2 align="center">technical details</h2>
 
 This library is primarely modeled around [ytdl-core](https://github.com/fent/node-ytdl-core) because that's what [resync](https://github.com/resync-tv/resync) was based on initially.
+
+You construct an instace and pass it the desired adapters. By default it tries to resolve
+with the adapters one-by-one, but can be configured by the second argument to first-to-resolve.

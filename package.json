@@ -39,6 +39,7 @@
   "devDependencies": {
     "@types/debug": "^4.1.7",
     "@types/node": "^16.11.12",
+    "@types/promise.any": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "ava": "^3.15.0",
@@ -58,6 +59,7 @@
     "execa": "^5.1.1",
     "fs-jetpack": "^4.3.0",
     "got": "^11.8.3",
+    "promise.any": "^2.0.2",
     "type-fest": "^0.20.2",
     "ytdl-core": "^4.9.1"
   }
