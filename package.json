@@ -1,5 +1,5 @@
 {
-  "name": "yt-dl",
+  "name": "@resync-tv/yt-dl",
   "description": "a wrapper for various youtube downloading solutions",
   "keywords": [
     "youtube",
