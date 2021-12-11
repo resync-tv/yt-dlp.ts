@@ -1,10 +1,12 @@
 import test from "ava"
-import YTDL, { adapters, yt_dl } from "../src"
+import YTDL, { adapters, yt_dl, ensureBinaries } from "../src"
 import testVideos from "../test-videos.json"
 
 let ytdlpAdapter: yt_dl.YTDLP
-test.before(() => {
-  ytdlpAdapter = new adapters.ytdlp()
+let binPath: string
+test.before(async () => {
+  binPath = await ensureBinaries(true)
+  ytdlpAdapter = new adapters.ytdlp(binPath)
 })
 
 for (const [key, video] of Object.entries(testVideos)) {

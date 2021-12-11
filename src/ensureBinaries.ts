@@ -17,6 +17,14 @@ const BIN_PATH = join(__dirname, "..", "bin")
 
 const pipeline = promisify(stream.pipeline)
 
+const linuxPermissions = async (filePath: string) =>
+  await execa("chmod", ["+x", filePath], { shell: true })
+
+/**
+ * Ensure the existence of the binaries and/or download/update them.
+ * @param update if the binary already exists, should it be updated? Defaults to `false`.
+ * @returns path to the binary
+ */
 const ensureBinaries = async (update = false): Promise<string> => {
   log("ensuring binaries")
 
@@ -39,12 +47,15 @@ const ensureBinaries = async (update = false): Promise<string> => {
       log("updating binary")
       const { stdout } = await execa(filePath, ["--update"])
 
+      if (os.platform() === "linux") linuxPermissions(filePath)
       log(`updated binary: ${stdout}`)
     }
     return filePath
   }
 
   await pipeline(got.stream(downloadUrl), jetpack.createWriteStream(filePath))
+
+  if (os.platform() === "linux") linuxPermissions(filePath)
   return filePath
 }
 

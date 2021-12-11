@@ -1,6 +1,9 @@
 import type * as yt_dl from "../types"
 export { yt_dl }
 
+import ensureBinaries from "./ensureBinaries"
+export { ensureBinaries }
+
 import any from "promise.any"
 
 import ytdl_core from "./adapter/ytdl-core"
