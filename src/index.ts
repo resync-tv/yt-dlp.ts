@@ -1,5 +1,5 @@
 import type * as yt_dl from "../types"
-export type { yt_dl }
+export { yt_dl }
 
 import any from "promise.any"
 

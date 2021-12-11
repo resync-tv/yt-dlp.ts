@@ -22,7 +22,8 @@
     "prepublishOnly": "npm test"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "types/**/*"
   ],
   "ava": {
     "extensions": [
