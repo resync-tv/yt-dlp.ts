@@ -1,10 +1,8 @@
-import type YTDLP from "../src/yt-dlp"
-
 import test from "ava"
-import YTDL, { adapters } from "../src"
+import YTDL, { adapters, yt_dl } from "../src"
 import testVideos from "../test-videos.json"
 
-let ytdlpAdapter: YTDLP
+let ytdlpAdapter: yt_dl.YTDLP
 test.before(() => {
   ytdlpAdapter = new adapters.ytdlp()
 })

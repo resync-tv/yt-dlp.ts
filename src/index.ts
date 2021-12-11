@@ -1,20 +1,23 @@
-import type { ytdlAdapter } from "../types"
-export * from "../types"
+import type * as yt_dl from "../types"
+export type { yt_dl }
 
 import any from "promise.any"
 
-import ytdlcore from "./ytdl-core"
-import ytdlp from "./yt-dlp"
-export const adapters = { ytdlcore, ytdlp }
+import ytdl_core from "./adapter/ytdl-core"
+import ytdlp from "./adapter/yt-dlp"
+export const adapters = { ytdlcore: ytdl_core, ytdlp }
 
 import debug from "./debug"
 const log = debug("main")
 
 export type ResolveStrategy = "fallback" | "first-to-resolve"
 export default class YTDL {
-  constructor(public adapters: ytdlAdapter[], public strategy: ResolveStrategy = "fallback") {}
+  constructor(
+    public adapters: yt_dl.Adapter[],
+    public strategy: ResolveStrategy = "fallback"
+  ) {}
 
-  getInfo: ytdlAdapter = async url => {
+  getInfo: yt_dl.Adapter = async url => {
     if (this.strategy === "fallback") {
       const fallbacks = [...this.adapters]
 
