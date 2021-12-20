@@ -2,6 +2,7 @@ import { promisify } from "util"
 import stream from "stream"
 import os from "os"
 import { join } from "path"
+import { chmod } from "fs"
 
 import jetpack from "fs-jetpack"
 import got from "got"
@@ -16,9 +17,11 @@ const YT_DLP_URL_UNIX = "https://github.com/yt-dlp/yt-dlp/releases/latest/downlo
 const BIN_PATH = join(__dirname, "..", "bin")
 
 const pipeline = promisify(stream.pipeline)
+const chmodPromise = promisify(chmod)
 
-const linuxPermissions = async (filePath: string) =>
-  await execa("chmod", ["+x", filePath], { shell: true })
+const linuxPermissions = async (filePath: string) => {
+  return await chmodPromise(filePath, "755")
+}
 
 /**
  * Ensure the existence of the binaries and/or download/update them.
