@@ -1,72 +1,81 @@
 export interface Video {
-    id:                   string;
-    title:                string;
-    formats:              Format[];
-    thumbnails:           Thumbnail[];
-    thumbnail:            string;
-    description:          string;
-    upload_date:          string;
-    uploader:             string;
-    uploader_id:          string;
-    uploader_url:         string;
-    channel_id:           string;
-    channel_url:          string;
-    duration:             number;
-    view_count:           number;
-    average_rating:       number;
-    age_limit:            number;
-    webpage_url:          string;
-    categories:           string[];
-    tags:                 string[];
-    playable_in_embed:    boolean;
-    is_live:              boolean;
-    was_live:             boolean;
-    live_status:          string;
-    release_timestamp:    number | null;
-    automatic_captions?:  { [key: string]: AutomaticCaption[] };
-    subtitles?:           Subtitles;
-    chapters:             null;
-    like_count:           number;
-    channel:              string;
-    availability:         string;
-    original_url:         string;
-    webpage_url_basename: string;
-    extractor:            string;
-    extractor_key:        string;
-    playlist:             null;
-    playlist_index:       null;
-    display_id:           string;
-    duration_string:      string;
-    requested_subtitles:  null;
-    __has_drm:            boolean;
-    requested_formats:    Format[];
-    format:               string;
-    format_id:            string;
-    ext:                  VideoEXTEnum;
-    protocol:             string;
-    language:             null;
-    format_note:          string;
-    filesize_approx:      number;
-    tbr:                  number;
-    width:                number;
-    height:               number;
-    resolution:           string;
-    fps:                  number;
-    dynamic_range:        DynamicRange;
-    vcodec:               string;
-    vbr:                  number;
-    stretched_ratio:      null;
-    acodec:               Acodec;
-    abr:                  number;
-    asr:                  number;
-    epoch:                number;
-    album?:               string;
-    artist?:              string;
-    track?:               string;
-    release_date?:        string;
-    release_year?:        number;
-    creator?:             string;
-    alt_title?:           string;
+    id:                     string;
+    title:                  string;
+    formats:                Format[];
+    thumbnails:             Thumbnail[];
+    thumbnail:              string;
+    description:            string;
+    uploader:               string;
+    uploader_id:            string;
+    uploader_url:           string;
+    channel_id:             string;
+    channel_url:            string;
+    duration:               number;
+    view_count:             number;
+    average_rating:         null;
+    age_limit:              number;
+    webpage_url:            string;
+    categories:             string[];
+    tags:                   string[];
+    playable_in_embed:      boolean;
+    is_live:                boolean;
+    was_live:               boolean;
+    live_status:            LiveStatus;
+    release_timestamp:      number | null;
+    automatic_captions?:    { [key: string]: AutomaticCaption[] };
+    subtitles?:             Subtitles;
+    chapters:               null;
+    upload_date:            string;
+    like_count:             number;
+    channel:                string;
+    channel_follower_count: number;
+    availability:           Availability;
+    original_url:           string;
+    webpage_url_basename:   WebpageURLBasename;
+    webpage_url_domain:     WebpageURLDomain;
+    extractor:              Extractor;
+    extractor_key:          ExtractorKey;
+    playlist:               null;
+    playlist_index:         null;
+    display_id:             string;
+    fulltitle:              string;
+    duration_string:        string;
+    requested_subtitles:    null;
+    __has_drm:              boolean;
+    requested_downloads:    RequestedDownload[];
+    requested_formats:      Format[];
+    format:                 string;
+    format_id:              string;
+    ext:                    AudioEXTEnum;
+    protocol:               VideoProtocol;
+    language:               null;
+    format_note:            string;
+    filesize_approx:        number;
+    tbr:                    number;
+    width:                  number;
+    height:                 number;
+    resolution:             string;
+    fps:                    number;
+    dynamic_range:          DynamicRange;
+    vcodec:                 Vcodec;
+    vbr:                    number;
+    stretched_ratio:        null;
+    acodec:                 Acodec;
+    abr:                    number;
+    asr:                    number;
+    epoch:                  number;
+    _type:                  Type;
+    album?:                 string;
+    artist?:                string;
+    track?:                 string;
+    release_date?:          string;
+    release_year?:          number;
+    creator?:               string;
+    alt_title?:             string;
+}
+
+export enum Type {
+    Video = "video",
 }
 
 export enum Acodec {
@@ -91,12 +100,17 @@ export enum AutomaticCaptionEXT {
     Vtt = "vtt",
 }
 
+export enum Availability {
+    NeedsAuth = "needs_auth",
+    Public = "public",
+}
+
 export enum DynamicRange {
     Hdr10 = "HDR10",
     SDR = "SDR",
 }
 
-export enum VideoEXTEnum {
+export enum AudioEXTEnum {
     M4A = "m4a",
     Mhtml = "mhtml",
     Mp4 = "mp4",
@@ -105,19 +119,27 @@ export enum VideoEXTEnum {
     Webm = "webm",
 }
 
+export enum Extractor {
+    Youtube = "youtube",
+}
+
+export enum ExtractorKey {
+    Youtube = "Youtube",
+}
+
 export interface Format {
     format_id:            string;
     format_note:          string;
-    ext:                  VideoEXTEnum;
-    protocol:             Protocol;
+    ext:                  AudioEXTEnum;
+    protocol:             FormatProtocol;
     acodec:               Acodec;
     vcodec:               string;
     url:                  string;
     width:                number | null;
     height:               number | null;
     fragments?:           Fragment[];
-    audio_ext:            AudioEXT;
-    video_ext:            VideoEXTEnum;
+    audio_ext:            AudioEXTEnum;
+    video_ext:            AudioEXTEnum;
     format:               string;
     resolution:           string;
     http_headers:         HTTPHeaders;
@@ -129,18 +151,13 @@ export interface Format {
     tbr?:                 number;
     language?:            string;
     language_preference?: number;
+    preference?:          number | null;
     dynamic_range?:       DynamicRange | null;
     abr?:                 number;
     downloader_options?:  DownloaderOptions;
     container?:           Container;
     vbr?:                 number;
     filesize_approx?:     number;
-}
-
-export enum AudioEXT {
-    M4A = "m4a",
-    None = "none",
-    Webm = "webm",
 }
 
 export enum Container {
@@ -159,41 +176,82 @@ export interface Fragment {
 }
 
 export interface HTTPHeaders {
-    "User-Agent":      string;
-    "Accept-Charset":  AcceptCharset;
+    "User-agent":      string;
     Accept:            Accept;
-    "Accept-Encoding": AcceptEncoding;
-    "Accept-Language": AcceptLanguage;
+    "Accept-encoding": AcceptEncoding;
+    "Accept-language": AcceptLanguage;
+    "Sec-fetch-mode":  SECFetchMode;
 }
 
 export enum Accept {
     TextHTMLApplicationXHTMLXMLApplicationXMLQ09Q08 = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
 
-export enum AcceptCharset {
-    ISO88591UTF8Q07Q07 = "ISO-8859-1,utf-8;q=0.7,*;q=0.7",
-}
-
 export enum AcceptEncoding {
-    GzipDeflate = "gzip, deflate",
+    GzipDeflateBr = "gzip, deflate, br",
 }
 
 export enum AcceptLanguage {
     EnUsEnQ05 = "en-us,en;q=0.5",
 }
 
-export enum Protocol {
+export enum SECFetchMode {
+    Navigate = "navigate",
+}
+
+export enum FormatProtocol {
     HTTPS = "https",
     Mhtml = "mhtml",
 }
 
+export enum LiveStatus {
+    NotLive = "not_live",
+    WasLive = "was_live",
+}
+
+export enum VideoProtocol {
+    HTTPSHTTPS = "https+https",
+}
+
+export interface RequestedDownload {
+    requested_formats:        Format[];
+    format:                   string;
+    format_id:                string;
+    ext:                      AudioEXTEnum;
+    protocol:                 VideoProtocol;
+    format_note:              string;
+    filesize_approx:          number;
+    tbr:                      number;
+    width:                    number;
+    height:                   number;
+    resolution:               string;
+    fps:                      number;
+    dynamic_range:            DynamicRange;
+    vcodec:                   Vcodec;
+    vbr:                      number;
+    acodec:                   Acodec;
+    abr:                      number;
+    asr:                      number;
+    epoch:                    number;
+    _filename:                string;
+    __write_download_archive: boolean;
+}
+
+export enum Vcodec {
+    Avc1640028 = "avc1.640028",
+    Vp9 = "vp9",
+    Vp92 = "vp9.2",
+}
+
 export interface Subtitles {
+    af?:        AutomaticCaption[];
     sq?:        AutomaticCaption[];
     am?:        AutomaticCaption[];
     ar?:        AutomaticCaption[];
     hy?:        AutomaticCaption[];
     az?:        AutomaticCaption[];
     bn?:        AutomaticCaption[];
+    eu?:        AutomaticCaption[];
     bs?:        AutomaticCaption[];
     bg?:        AutomaticCaption[];
     my?:        AutomaticCaption[];
@@ -223,10 +281,13 @@ export interface Subtitles {
     de?:        AutomaticCaption[];
     el?:        AutomaticCaption[];
     gu?:        AutomaticCaption[];
+    ht?:        AutomaticCaption[];
+    haw?:       AutomaticCaption[];
     iw?:        AutomaticCaption[];
     hi?:        AutomaticCaption[];
     hu?:        AutomaticCaption[];
     is?:        AutomaticCaption[];
+    ig?:        AutomaticCaption[];
     id?:        AutomaticCaption[];
     ga?:        AutomaticCaption[];
     it?:        AutomaticCaption[];
@@ -244,6 +305,7 @@ export interface Subtitles {
     mk?:        AutomaticCaption[];
     ms?:        AutomaticCaption[];
     ml?:        AutomaticCaption[];
+    mr?:        AutomaticCaption[];
     mn?:        AutomaticCaption[];
     ne?:        AutomaticCaption[];
     no?:        AutomaticCaption[];
@@ -254,6 +316,7 @@ export interface Subtitles {
     pt?:        AutomaticCaption[];
     "pt-BR"?:   AutomaticCaption[];
     "pt-PT"?:   AutomaticCaption[];
+    pa?:        AutomaticCaption[];
     ro?:        AutomaticCaption[];
     ru?:        AutomaticCaption[];
     sr?:        AutomaticCaption[];
@@ -266,6 +329,7 @@ export interface Subtitles {
     "es-419"?:  AutomaticCaption[];
     "es-MX"?:   AutomaticCaption[];
     "es-US"?:   AutomaticCaption[];
+    sw?:        AutomaticCaption[];
     sv?:        AutomaticCaption[];
     tg?:        AutomaticCaption[];
     ta?:        AutomaticCaption[];
@@ -276,7 +340,9 @@ export interface Subtitles {
     ur?:        AutomaticCaption[];
     uz?:        AutomaticCaption[];
     vi?:        AutomaticCaption[];
+    fy?:        AutomaticCaption[];
     yi?:        AutomaticCaption[];
+    zu?:        AutomaticCaption[];
     live_chat?: LiveChat[];
 }
 
@@ -293,5 +359,26 @@ export interface Thumbnail {
     id:          string;
     height?:     number;
     width?:      number;
-    resolution?: string;
+    resolution?: Resolution;
+}
+
+export enum Resolution {
+    The120X90 = "120x90",
+    The1280X720 = "1280x720",
+    The168X94 = "168x94",
+    The1920X1080 = "1920x1080",
+    The196X110 = "196x110",
+    The246X138 = "246x138",
+    The320X180 = "320x180",
+    The336X188 = "336x188",
+    The480X360 = "480x360",
+    The640X480 = "640x480",
+}
+
+export enum WebpageURLBasename {
+    Watch = "watch",
+}
+
+export enum WebpageURLDomain {
+    YoutubeCOM = "youtube.com",
 }
