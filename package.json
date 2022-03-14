@@ -8,7 +8,7 @@
     "ytdl-core",
     "yt-dlp"
   ],
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "lib/index.js",
   "license": "MIT",
   "author": "vaaski <admin@vaa.ski>",
