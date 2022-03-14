@@ -12,6 +12,7 @@ type _EnsuredFormatProps = {
   hasVideo: boolean
   quality: string
   audioBitrate?: number
+  filesize?: number
 }
 
 export type EnsuredVideoFormat = Merge<PartialDeep<videoFormat>, _EnsuredFormatProps>

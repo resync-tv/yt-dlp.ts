@@ -7,6 +7,8 @@ import ensureBinaries from "../ensureBinaries"
 import debug from "../debug"
 const log = debug("ytdlp")
 
+// TODO: add getVersion fn
+
 export default class YTDLP {
   constructor(public binPath?: string) {}
 
@@ -40,6 +42,7 @@ export default class YTDLP {
           width: format.width ?? undefined,
           quality: format.format_note,
           audioBitrate: format.asr ?? undefined,
+          filesize: format.filesize ?? format.filesize_approx ?? undefined,
         })
       ),
     }

@@ -13,14 +13,18 @@ for (const [key, video] of Object.entries(testVideos)) {
   test(`fallback: ${key}`, async t => {
     const ytdl = new YTDL([adapters.ytdlcore, ytdlpAdapter.getInfo], "fallback")
     const info = await ytdl.getInfo(video)
+    const [format] = info.formats
 
-    t.truthy(info.formats[0].url)
+    t.truthy(format.url)
+    t.truthy(format.quality)
   })
 
   test(`first-to-resolve: ${key}`, async t => {
     const ytdl = new YTDL([adapters.ytdlcore, ytdlpAdapter.getInfo], "first-to-resolve")
     const info = await ytdl.getInfo(video)
+    const [format] = info.formats
 
-    t.truthy(info.formats[0].url)
+    t.truthy(format.url)
+    t.truthy(format.quality)
   })
 }
