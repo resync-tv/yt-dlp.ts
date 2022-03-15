@@ -13,6 +13,8 @@ type _EnsuredFormatProps = {
   quality: string
   audioBitrate?: number
   filesize?: number
+  format_note?: string
+  http_headers?: Record<string, string>
 }
 
 export type EnsuredVideoFormat = Merge<PartialDeep<videoFormat>, _EnsuredFormatProps>

@@ -43,6 +43,9 @@ export default class YTDLP {
           quality: format.format_note,
           audioBitrate: format.asr ?? undefined,
           filesize: format.filesize ?? format.filesize_approx ?? undefined,
+          format_note: format.format_note,
+          // i know this is hacky, but since the yt-dlp types are automatically generated, its kinda the only way
+          http_headers: format.http_headers as any as Record<string, string>,
         })
       ),
     }
