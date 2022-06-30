@@ -46,13 +46,13 @@ const ensureBinaries = async (update = false): Promise<string> => {
   if (jetpack.exists(filePath)) {
     log(`found binary at ${filePath}`)
 
-    if (update) {
-      log("updating binary")
-      const { stdout } = await execa(filePath, ["--update"])
+    // if (update) {
+    //   log("updating binary")
+    //   const { stdout } = await execa(filePath, ["--update"])
 
-      if (os.platform() !== "win32") linuxPermissions(filePath)
-      log(`updated binary: ${stdout}`)
-    }
+    //   if (os.platform() !== "win32") linuxPermissions(filePath)
+    //   log(`updated binary: ${stdout}`)
+    // }
     return filePath
   }
 
