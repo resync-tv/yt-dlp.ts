@@ -31,13 +31,13 @@ const linuxPermissions = async (filePath: string) => {
 const ensureBinaries = async (update = false): Promise<string> => {
   log("ensuring binaries")
 
-  let downloadUrl = YT_DLP_URL_WIN
-  let filename = "yt-dlp.exe"
+  let downloadUrl = YT_DLP_URL_UNIX
+  let filename = "yt-dlp"
 
   switch (os.platform()) {
-    case "linux":
-      downloadUrl = YT_DLP_URL_UNIX
-      filename = "yt-dlp"
+    case "win32":
+      downloadUrl = YT_DLP_URL_WIN
+      filename = "yt-dlp.exe"
       break
   }
 
@@ -50,7 +50,7 @@ const ensureBinaries = async (update = false): Promise<string> => {
       log("updating binary")
       const { stdout } = await execa(filePath, ["--update"])
 
-      if (os.platform() === "linux") linuxPermissions(filePath)
+      if (os.platform() !== "win32") linuxPermissions(filePath)
       log(`updated binary: ${stdout}`)
     }
     return filePath
@@ -58,7 +58,7 @@ const ensureBinaries = async (update = false): Promise<string> => {
 
   await pipeline(got.stream(downloadUrl), jetpack.createWriteStream(filePath))
 
-  if (os.platform() === "linux") linuxPermissions(filePath)
+  if (os.platform() !== "win32") linuxPermissions(filePath)
   return filePath
 }
 
