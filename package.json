@@ -22,6 +22,7 @@
     "dev": "tsx watch src/index.ts",
     "build": "pkgroll",
     "types": "tsx scripts/generate-types.ts",
+    "test": "echo todo",
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts"
   },
