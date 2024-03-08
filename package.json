@@ -1,10 +1,23 @@
 {
   "name": "yt-dlp.ts",
-  "module": "src/index.ts",
   "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    "require": {
+      "types": "./dist/index.d.cts",
+      "default": "./dist/index.cjs"
+    },
+    "import": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
   "scripts": {
     "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
+    "build": "pkgroll",
     "types": "tsx scripts/generate-types.ts",
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts"
@@ -16,6 +29,7 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-unicorn": "^51.0.1",
+    "pkgroll": "^2.0.2",
     "prettier": "^3.2.5",
     "quicktype-core": "^23.0.105",
     "tsx": "^4.7.1",
