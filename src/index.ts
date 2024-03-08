@@ -1,4 +1,5 @@
 import type { YtDLP } from "../types/yt-dlp"
+export type * from "../types/yt-dlp"
 
 import { execa } from "execa"
 
