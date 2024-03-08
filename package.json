@@ -1,5 +1,7 @@
 {
   "name": "@resync-tv/yt-dlp",
+  "version": "0.0.1",
+  "description": "A very slim wrapper around yt-dlp to provide type-safety",
   "type": "module",
   "module": "./dist/index.mjs",
   "exports": {
@@ -8,6 +10,11 @@
       "default": "./dist/index.mjs"
     }
   },
+  "repository": {
+    "url": "https://github.com/resync-tv/yt-dlp.ts",
+    "type": "git"
+  },
+  "author": "vaaski <admin@vaa.ski>",
   "files": [
     "dist"
   ],
