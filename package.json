@@ -5,6 +5,7 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
+    "types": "tsx scripts/generate-types.ts",
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts"
   },
@@ -16,10 +17,14 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-unicorn": "^51.0.1",
     "prettier": "^3.2.5",
+    "quicktype-core": "^23.0.105",
     "tsx": "^4.7.1",
     "typescript": "^5.4.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "execa": "^8.0.1"
   }
 }

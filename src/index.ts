@@ -1,1 +1,3 @@
-console.log("hello world")
+import testVideos from "../test-videos.json"
+
+console.log(testVideos)
