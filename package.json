@@ -1,5 +1,5 @@
 {
-  "name": "yt-dlp.ts",
+  "name": "@resync-tv/yt-dlp",
   "type": "module",
   "module": "./dist/index.mjs",
   "exports": {
@@ -8,6 +8,9 @@
       "default": "./dist/index.mjs"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
