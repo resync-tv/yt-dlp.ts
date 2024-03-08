@@ -11,8 +11,7 @@
     }
   },
   "repository": {
-    "url": "https://github.com/resync-tv/yt-dlp.ts",
-    "type": "git"
+    "url": "git+https://github.com/resync-tv/yt-dlp.ts.git"
   },
   "author": "vaaski <admin@vaa.ski>",
   "files": [
