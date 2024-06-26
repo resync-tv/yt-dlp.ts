@@ -30,7 +30,7 @@ export const streamFromInfo = (info: YtDLP, extraFlags: string[] = []) => {
   return process as typeof process & GuaranteedStdio
 }
 
-export const updateYTDLP = async (channel: string) => {
+export const updateYTDLP = async (channel?: string) => {
   const extraFlags: string[] = []
   if (channel) {
     extraFlags.push("--update-to", channel)
