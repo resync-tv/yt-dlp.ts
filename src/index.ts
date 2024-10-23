@@ -16,9 +16,26 @@ export type GuaranteedStdio = {
   stdout: internal.Readable
   stderr: internal.Readable
 }
+/**
+ * @deprecated Use `downloadFromInfo` with destination `"-"` instead
+ */
 export const streamFromInfo = (info: YtDLP, extraFlags: string[] = []) => {
+  return downloadFromInfo(info, "-", extraFlags)
+}
+
+export const downloadFromInfo = async (
+  info: YtDLP,
+  destination: string,
+  extraFlags: string[] = []
+) => {
   const infoString = JSON.stringify(info)
-  const process = execa("yt-dlp", [...extraFlags, "-o", "-", "--load-info-json", "-"])
+  const process = execa("yt-dlp", [
+    ...extraFlags,
+    "-o",
+    destination,
+    "--load-info-json",
+    "-",
+  ])
 
   if (!process.stdin) throw new Error("No yt-dlp stdin")
   if (!process.stdout) throw new Error("No yt-dlp stdout")
