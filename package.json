@@ -21,7 +21,7 @@
     "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
     "build": "pkgroll",
-    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "types": "tsx scripts/generate-types.ts",
     "test": "echo todo",
     "format": "prettier --write .",
