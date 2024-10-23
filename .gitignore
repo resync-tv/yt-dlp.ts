@@ -2,3 +2,4 @@ node_modules/
 .DS_Store
 types/yt-dlp.d.ts
 dist
+type-samples.json

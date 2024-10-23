@@ -21,6 +21,11 @@ for (const [name, url] of Object.entries(testVideos)) {
   console.log(`  - ${name}`)
   const process = await execa("yt-dlp", ["-J", url])
   samples.push(process.stdout)
+
+  await writeFile(
+    join(__dirname, `../type-samples.json`),
+    JSON.stringify(samples, undefined, 2)
+  )
 }
 
 const jsonInput = jsonInputForTargetLanguage("typescript")
