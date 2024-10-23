@@ -1,6 +1,6 @@
 {
   "name": "@resync-tv/yt-dlp",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "A very slim wrapper around yt-dlp to provide type-safety",
   "type": "module",
   "module": "./dist/index.mjs",
