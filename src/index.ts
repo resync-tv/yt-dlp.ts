@@ -1,6 +1,6 @@
 import type internal from "node:stream"
 import type { YtDLP } from "../types/yt-dlp"
-export type * from "../types/yt-dlp"
+export type * as YtDLP from "../types/yt-dlp"
 
 import { execa } from "execa"
 
@@ -11,7 +11,7 @@ export const getInfo = async (url: string, extraFlags: string[] = []) => {
   return data
 }
 
-export type GuaranteedStdio = {
+type GuaranteedStdio = {
   stdin: internal.Writable
   stdout: internal.Readable
   stderr: internal.Readable
