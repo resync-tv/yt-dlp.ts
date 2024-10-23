@@ -18,11 +18,11 @@
     "dist"
   ],
   "scripts": {
-    "start": "tsx src/index.ts",
-    "dev": "tsx watch src/index.ts",
+    "start": "bun run src/index.ts",
+    "dev": "bun run --watch src/index.ts",
     "build": "pkgroll",
     "prepublishOnly": "npm run build",
-    "types": "tsx scripts/generate-types.ts",
+    "types": "bun run scripts/generate-types.ts",
     "test": "echo todo",
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts"
@@ -38,7 +38,6 @@
     "pkgroll": "^2.0.2",
     "prettier": "^3.2.5",
     "quicktype-core": "^23.0.105",
-    "tsx": "^4.7.1",
     "typescript": "^5.4.2"
   },
   "peerDependencies": {
