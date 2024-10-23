@@ -28,17 +28,17 @@
     "lint": "eslint . --ext .ts"
   },
   "devDependencies": {
-    "@types/node": "^20.11.25",
-    "@typescript-eslint/eslint-plugin": "^7.1.1",
-    "@typescript-eslint/parser": "^7.1.1",
-    "eslint": "^8.57.0",
+    "@types/node": "^20.16.15",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-unicorn": "^51.0.1",
     "execa": "^8.0.1",
-    "pkgroll": "^2.0.2",
-    "prettier": "^3.2.5",
-    "quicktype-core": "^23.0.105",
-    "typescript": "^5.4.2"
+    "pkgroll": "^2.5.0",
+    "prettier": "^3.3.3",
+    "quicktype-core": "^23.0.170",
+    "typescript": "^5.6.3"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
