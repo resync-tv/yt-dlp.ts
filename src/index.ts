@@ -1,12 +1,12 @@
 import type internal from "node:stream"
-import type { YtDLP } from "../types/yt-dlp"
-export type * as YtDLP from "../types/yt-dlp"
+import type { Entry, YtDLP as ytDlpInfo } from "../types/yt-dlp"
+export type * as ytDlpInfo from "../types/yt-dlp"
 
 import { execa } from "execa"
 
 export const getInfo = async (url: string, extraFlags: string[] = []) => {
   const process = await execa("yt-dlp", ["-J", ...extraFlags, url])
-  const data: YtDLP = JSON.parse(process.stdout)
+  const data: ytDlpInfo = JSON.parse(process.stdout)
 
   return data
 }
@@ -19,12 +19,12 @@ type GuaranteedStdio = {
 /**
  * @deprecated Use `downloadFromInfo` with destination `"-"` instead
  */
-export const streamFromInfo = (info: YtDLP, extraFlags: string[] = []) => {
+export const streamFromInfo = (info: ytDlpInfo, extraFlags: string[] = []) => {
   return downloadFromInfo(info, "-", extraFlags)
 }
 
-export const downloadFromInfo = async (
-  info: YtDLP,
+export const downloadFromInfo = (
+  info: ytDlpInfo | Entry,
   destination: string,
   extraFlags: string[] = []
 ) => {
